@@ -24,7 +24,7 @@ function Header({ account, setAccount }) {
 
     return (
         <header>
-          <p className="brand">fun.pump</p>
+          <p className="brand">pump.eth</p>
             {account ? (
               <div className="btn--fancy">
                 <span>Connected: {account.slice(0, 6)}...{account.slice(-4)}</span>
