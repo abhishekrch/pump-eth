@@ -7,15 +7,9 @@ function Header({ account, setAccount }) {
                 alert('Please install Metamask')
                 return;
             }
-
-            await window.ethereum.request({method: 'eth_requestAccounts'});
-
-            const provider = new ethers.BrowserProvider(window.ethereum);
-            const signer = await provider.getSigner();
-
-            const address = await signer.getAddress();
-            setAccount(address);
-            
+            const accounts = await window.ethereum.request({method: 'eth_requestAccounts'});
+            const account = ethers.getAddress(accounts[0])
+            setAccount(account);
         } catch (e) {
             console.error("Error connecting wallet", e);
             alert("Failed to connect wallet. Please make sure MetaMask is installed");
