@@ -8,6 +8,7 @@ import "./globals.css";
 import List from "./components/List";
 import images from "@/utils/images";
 import Token from "./components/Token";
+import Trade from "./components/Trade";
 
 export default function Home() {
   const [account, setAccount] = useState(null);
@@ -16,9 +17,16 @@ export default function Home() {
   const [fee, setFee] = useState(0);
   const [showCreate, setShowCreate] = useState(false);
   const [tokens, setTokens] = useState([]);
+  const [token, setToken] = useState(null);
+  const [showTrade, setShowTrade] = useState(false);
 
   function toggleCreate() {
     showCreate ? setShowCreate(false) : setShowCreate(true);
+  }
+
+  function toggleTrade(token) {
+    setToken(token);
+    showTrade ? setShowTrade(false) : setShowTrade(true);
   }
 
   async function loadBlockchainData() {
@@ -107,11 +115,11 @@ export default function Home() {
             {!account ? (
               <p>please connect wallet</p>
             ) : tokens.length === 0 ? (
-              <p>no tokens listd</p>
+              <p>no tokens listed</p>
             ) : (
               tokens.map((token, index) => (
                 <Token
-                  toggleCreate={() => {}}
+                  toggleTrade={toggleTrade}
                   token={token}
                   key={index}
                 />
@@ -124,6 +132,16 @@ export default function Home() {
       {showCreate && (
         <List
           toggleCreate={toggleCreate}
+          fee={fee}
+          provider={provider}
+          factory={factory}
+        />
+      )}
+
+      {showTrade && (
+        <Trade
+          toggleTrade={toggleTrade}
+          token={token}
           fee={fee}
           provider={provider}
           factory={factory}
