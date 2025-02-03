@@ -4,7 +4,7 @@ function Header({ account, setAccount }) {
     async function connectWallet() {
         try {
             if(!window.ethereum) {
-                alert('Please install Metamask')
+                alert('Please install any ethereum wallet')
                 return;
             }
             const accounts = await window.ethereum.request({method: 'eth_requestAccounts'});
@@ -12,7 +12,7 @@ function Header({ account, setAccount }) {
             setAccount(account);
         } catch (e) {
             console.error("Error connecting wallet", e);
-            alert("Failed to connect wallet. Please make sure MetaMask is installed");
+            alert("Failed to connect wallet. Please make sure any ethereum wallet is installed");
         }
     }
 
